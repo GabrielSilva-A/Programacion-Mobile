@@ -11,8 +11,8 @@ sealed class Categoria(val etiqueta: String){
 
 sealed class Prioridad(val etiqueta: String, val nivel: Int){
     object Baja : Prioridad ( "Baja", 1)
-    object Media : Prioridad ( "Media", 1)
-    object Alta : Prioridad ( "Alta", 1)
+    object Media : Prioridad ( "Media", 2)
+    object Alta : Prioridad ( "Alta", 3)
 }
 
 sealed class EstadoRecordatorio(val etiqueta: String){

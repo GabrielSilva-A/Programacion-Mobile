@@ -56,10 +56,14 @@ object ReminderData{
     val categorias: Set<Categoria> = recordatorios.map {it.categoria}.toSet()
 
     val estiloCategoria: Map<Categoria, Pair<String, Color>> = mapOf(
-        Categoria.Personal to ("Personal") to Color(0xFF197602),
-        Categoria.Trabajo to ("Trabajo") to Color(0xFF7B1FA2),
-        Categoria.Salud to ("Salud") to Color(0xFF00897B),
-        Categoria.Estudios to ("Estudios") to Color(0xFFEF6C00)
+        Categoria.Personal to
+                ("Personal" to Color(0xFF197602)),
+        Categoria.Trabajo to
+                ("Trabajo" to Color(0xFF7B1FA2)),
+        Categoria.Salud to
+                ("Salud" to Color(0xFF00897B)),
+        Categoria.Estudios to
+                ("Estudios" to Color(0xFFEF6C00))
     )
 
     fun porEstado(
