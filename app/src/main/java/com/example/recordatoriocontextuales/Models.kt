@@ -70,12 +70,3 @@ data class Recordatorio(
 }
 
 
-
-fun probarValidaciones() {
-    val ubicacion = Ubicacion(
-        latitud = 120.0,
-        longitud = -58.4
-    )
-
-    println(ubicacion)
-}
