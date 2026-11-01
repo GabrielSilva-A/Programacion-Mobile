@@ -16,6 +16,7 @@ import com.example.recordatoriocontextuales.ui.theme.RecordatorioContextualesThe
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        probarValidaciones()
         enableEdgeToEdge()
         setContent {
             RecordatorioContextualesTheme {

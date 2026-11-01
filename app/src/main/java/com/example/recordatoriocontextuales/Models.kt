@@ -27,11 +27,24 @@ sealed class EstadoAplicacion{
     data class Error (val mensaje: String) : EstadoAplicacion()
 }
 
+
 data class Ubicacion(
     val latitud: Double,
     val longitud: Double,
     val descripcion: String? = null
-)
+) {
+    init {
+        require(latitud in -90.0..90.0) {
+            "La latitud debe estar entre -90 y 90"
+        }
+
+        require(longitud in -180.0..180.0) {
+            "La longitud debe estar entre -180 y 180"
+        }
+    }
+}
+
+
 
 data class Recordatorio(
     val id: Int,
@@ -44,4 +57,25 @@ data class Recordatorio(
     val ubicacion: Ubicacion? = null,
     val aviso: LocalDateTime? = null,
     val sincronizado: Boolean = false
-)
+) {
+    init {
+        require(id > 0) {
+            "El ID del recordatorio debe ser mayor que cero"
+        }
+
+        require(titulo.isNotBlank()) {
+            "El título del recordatorio no puede estar vacío"
+        }
+    }
+}
+
+
+
+fun probarValidaciones() {
+    val ubicacion = Ubicacion(
+        latitud = 120.0,
+        longitud = -58.4
+    )
+
+    println(ubicacion)
+}
