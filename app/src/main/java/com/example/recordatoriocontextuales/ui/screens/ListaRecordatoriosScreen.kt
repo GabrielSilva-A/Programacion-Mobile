@@ -41,7 +41,9 @@ fun ListaRecordatoriosRoute(
 fun ListaRecordatorios(
     estado: ListaUiState,
     onReintentar: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCrear: (() -> Unit)? = null,
+    onDetalle: ((Int) -> Unit)? = null
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         Text(
