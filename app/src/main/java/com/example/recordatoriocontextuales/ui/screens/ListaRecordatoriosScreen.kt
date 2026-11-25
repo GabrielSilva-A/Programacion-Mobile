@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,13 +23,17 @@ import com.example.recordatoriocontextuales.ui.viewmodel.RecordatoriosViewModel
 @Composable
 fun ListaRecordatoriosRoute(
     viewModel: RecordatoriosViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCrear: (() -> Unit)? = null,
+    onDetalle: ((Int) -> Unit)? = null
 ) {
     val estado by viewModel.lista.collectAsStateWithLifecycle()
     ListaRecordatorios(
         estado = estado,
         onReintentar = viewModel::cargarLista,
-        modifier = modifier
+        modifier = modifier,
+        onCrear = onCrear,
+        onDetalle = onDetalle
     )
 }
 
@@ -58,12 +63,17 @@ fun ListaRecordatorios(
                 )
                 is ListaUiState.Datos -> LazyColumn(
                     modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = if (onCrear != null) 88.dp else 16.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     items(items = estado.recordatorios, key = { it.id }) { recordatorio ->
-                        TarjetaRecordatorio(recordatorio)
+                        TarjetaRecordatorio(recordatorio, onClick = onDetalle?.let { abrir -> { abrir(recordatorio.id) } })
                     }
+                }
+            }
+            if (onCrear != null) {
+                FloatingActionButton(onClick = onCrear, modifier = Modifier.align(Alignment.BottomEnd).padding(16.dp)) {
+                    Text("Nuevo +")
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.example.recordatoriocontextuales.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -14,7 +15,7 @@ import com.example.recordatoriocontextuales.model.Prioridad
 import com.example.recordatoriocontextuales.model.Recordatorio
 
 @Composable
-fun TarjetaRecordatorio(recordatorio: Recordatorio) {
+fun TarjetaRecordatorio(recordatorio: Recordatorio, onClick: (() -> Unit)? = null) {
 
     val estilo = ReminderData.estiloCategoria[recordatorio.categoria]
 
@@ -31,7 +32,7 @@ fun TarjetaRecordatorio(recordatorio: Recordatorio) {
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min)

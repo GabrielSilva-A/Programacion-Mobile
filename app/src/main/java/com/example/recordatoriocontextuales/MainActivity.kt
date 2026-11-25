@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.recordatoriocontextuales.ui.screens.ListaRecordatoriosRoute
+import com.example.recordatoriocontextuales.navigation.AppNavigation
 import com.example.recordatoriocontextuales.ui.viewmodel.RecordatoriosViewModel
 import com.example.recordatoriocontextuales.ui.theme.RecordatorioContextualesTheme
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    ListaRecordatoriosRoute(
+                    AppNavigation(
                         viewModel = recordatoriosViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
