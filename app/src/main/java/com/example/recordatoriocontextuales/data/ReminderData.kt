@@ -1,4 +1,10 @@
-package com.example.recordatoriocontextuales
+package com.example.recordatoriocontextuales.data
+
+import com.example.recordatoriocontextuales.model.Categoria
+import com.example.recordatoriocontextuales.model.EstadoRecordatorio
+import com.example.recordatoriocontextuales.model.Prioridad
+import com.example.recordatoriocontextuales.model.Recordatorio
+import com.example.recordatoriocontextuales.model.Ubicacion
 
 import androidx.compose.ui.graphics.Color
 import java.time.LocalDateTime

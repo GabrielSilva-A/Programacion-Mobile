@@ -1,4 +1,4 @@
-package com.example.recordatoriocontextuales
+package com.example.recordatoriocontextuales.model
 
 import java.time.LocalDateTime
 
