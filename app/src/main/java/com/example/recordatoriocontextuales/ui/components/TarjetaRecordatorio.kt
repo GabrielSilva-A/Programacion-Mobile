@@ -34,12 +34,12 @@ fun TarjetaRecordatorio(recordatorio: Recordatorio) {
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min)
         ) {
             Box(
                 modifier = Modifier
                     .width(6.dp)
-                    .height(135.dp)
+                    .fillMaxHeight()
                     .background(colorCategoria)
             )
 

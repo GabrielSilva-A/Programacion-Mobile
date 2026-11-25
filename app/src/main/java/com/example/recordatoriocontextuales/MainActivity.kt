@@ -8,7 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.recordatoriocontextuales.ui.screens.ListaRecordatorios
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.recordatoriocontextuales.ui.screens.ListaRecordatoriosRoute
+import com.example.recordatoriocontextuales.ui.viewmodel.RecordatoriosViewModel
 import com.example.recordatoriocontextuales.ui.theme.RecordatorioContextualesTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,10 +20,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             RecordatorioContextualesTheme {
+                val recordatoriosViewModel: RecordatoriosViewModel = viewModel()
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    ListaRecordatorios(
+                    ListaRecordatoriosRoute(
+                        viewModel = recordatoriosViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
