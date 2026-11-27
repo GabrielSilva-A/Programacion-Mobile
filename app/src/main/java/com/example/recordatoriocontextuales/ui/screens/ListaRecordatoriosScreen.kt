@@ -52,7 +52,8 @@ fun ListaRecordatorios(
     onReintentar: () -> Unit,
     modifier: Modifier = Modifier,
     onCrear: (() -> Unit)? = null,
-    onDetalle: ((Int) -> Unit)? = null
+    onDetalle: ((Int) -> Unit)? = null,
+    onConfiguracion: (() -> Unit)? = null
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         if (onConfiguracion != null) TextButton(onClick = onConfiguracion, modifier = Modifier.align(Alignment.End)) { Text("Configuración") }
