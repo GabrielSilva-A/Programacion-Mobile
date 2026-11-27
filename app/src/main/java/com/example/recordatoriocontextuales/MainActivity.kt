@@ -1,6 +1,9 @@
 package com.example.recordatoriocontextuales
 
 import android.os.Bundle
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.recordatoriocontextuales.ui.viewmodel.ConfiguracionViewModel
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,13 +22,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            RecordatorioContextualesTheme {
+            val configuracion: ConfiguracionViewModel = viewModel()
+            val preferencias by configuracion.preferencias.collectAsStateWithLifecycle()
+            RecordatorioContextualesTheme(darkTheme = preferencias.modoOscuro) {
                 val recordatoriosViewModel: RecordatoriosViewModel = viewModel()
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
                     AppNavigation(
                         viewModel = recordatoriosViewModel,
+                        configuracion = configuracion,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

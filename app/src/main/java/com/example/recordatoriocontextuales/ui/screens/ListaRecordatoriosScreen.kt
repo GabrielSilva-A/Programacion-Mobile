@@ -5,6 +5,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import com.example.recordatoriocontextuales.model.PreferenciasUsuario
+import com.example.recordatoriocontextuales.model.aplicarPreferencias
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,15 +28,21 @@ fun ListaRecordatoriosRoute(
     viewModel: RecordatoriosViewModel,
     modifier: Modifier = Modifier,
     onCrear: (() -> Unit)? = null,
-    onDetalle: ((Int) -> Unit)? = null
+    onDetalle: ((Int) -> Unit)? = null,
+    preferencias: PreferenciasUsuario = PreferenciasUsuario(),
+    onConfiguracion: (() -> Unit)? = null
 ) {
     val estado by viewModel.lista.collectAsStateWithLifecycle()
     ListaRecordatorios(
-        estado = estado,
+        estado = if (estado is ListaUiState.Datos) {
+            val visibles = aplicarPreferencias((estado as ListaUiState.Datos).recordatorios, preferencias)
+            if (visibles.isEmpty()) ListaUiState.Vacia else ListaUiState.Datos(visibles)
+        } else estado,
         onReintentar = viewModel::cargarLista,
         modifier = modifier,
         onCrear = onCrear,
-        onDetalle = onDetalle
+        onDetalle = onDetalle,
+        onConfiguracion = onConfiguracion
     )
 }
 
@@ -46,6 +55,7 @@ fun ListaRecordatorios(
     onDetalle: ((Int) -> Unit)? = null
 ) {
     Column(modifier = modifier.fillMaxSize()) {
+        if (onConfiguracion != null) TextButton(onClick = onConfiguracion, modifier = Modifier.align(Alignment.End)) { Text("Configuración") }
         Text(
             text = "Mis recordatorios",
             style = MaterialTheme.typography.headlineMedium,
